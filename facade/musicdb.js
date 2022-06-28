@@ -1,6 +1,5 @@
 import path from 'path';
 import { execSync } from 'child_process';
-import NodeID3 from 'node-id3';
 
 import { Facade } from './facade.js';
 
