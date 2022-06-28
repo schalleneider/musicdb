@@ -20,7 +20,7 @@ class Log {
             }
         });
 
-        this.logger = log4js.getLogger('animedb');
+        this.logger = log4js.getLogger('musicdb');
     }
 
     static get instance() {
