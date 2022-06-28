@@ -1,0 +1,21 @@
+env:
+  node: true
+  commonjs: false
+  es2021: true
+extends:
+  - eslint:recommended
+plugins:
+  - '@javascript-eslint'
+rules:
+  indent:
+    - error
+    - tab
+  linebreak-style:
+    - error
+    - windows
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always

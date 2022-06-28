@@ -1,0 +1,8 @@
+/node_modules/**
+/bin/**
+/config/**
+!/config/musicdb.env.json
+/database/**
+!/database/template.example.sqlite3
+/dist/**
+/logs/**

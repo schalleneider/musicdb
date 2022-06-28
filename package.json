@@ -1,0 +1,35 @@
+{
+  "name": "musicdb",
+  "version": "1.0.0",
+  "description": "musicdb",
+  "type": "module",
+  "exports": "./main.js",
+  "scripts": {
+    "redist": "npx caxa --input '.' --output './bin/musicdb.exe' --exclude ''./bin' './config' './database' './dist' './logs' -- '{{caxa}}/node_modules/.bin/node' '{{caxa}}/main.js'",
+    "dev:help": "node main.js --help",
+    "dev:start:download:jpop": "node main.js download --source='jpop'",
+    "dev:start:download:drama": "node main.js download --source='drama'",
+    "dev:start:download:games": "node main.js download --source='games'",
+    "dev:start:download:vocaloid": "node main.js download --source='vocaloid'",
+    "dev:start:download:doujin": "node main.js download --source='doujin'",
+    "dev:start:download:animation": "node main.js download --source='animation'",
+    "help": "./bin/musicdb.exe --help",
+    "start:download:jmusic:jpop": "./bin/musicdb.exe download --env=jmusic --source='jpop'",
+    "start:download:jmusic:drama": "./bin/musicdb.exe download --env=jmusic --source='drama'",
+    "start:download:jmusic:games": "./bin/musicdb.exe download --env=jmusic --source='games'",
+    "start:download:jmusic:vocaloid": "./bin/musicdb.exe download --env=jmusic --source='vocaloid'",
+    "start:download:jmusic:doujin": "./bin/musicdb.exe download --env=jmusic --source='doujin'",
+    "start:download:jmusic:animation": "./bin/musicdb.exe download --env=jmusic --source='animation'"
+  },
+  "author": "wschneider",
+  "license": "ISC",
+  "dependencies": {
+    "caxa": "^2.1.0",
+    "eslint": "^8.12.0",
+    "help": "^3.0.2",
+    "log4js": "^6.4.4",
+    "sqlite": "^4.0.25",
+    "sqlite3": "^5.0.2",
+    "yargs": "^17.4.0"
+  }
+}
