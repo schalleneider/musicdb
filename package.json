@@ -5,7 +5,7 @@
   "type": "module",
   "exports": "./main.js",
   "scripts": {
-    "redist": "npx caxa --input '.' --output './bin/musicdb.exe' --exclude ''./bin' './config' './database' './dist' './logs' -- '{{caxa}}/node_modules/.bin/node' '{{caxa}}/main.js'",
+    "redist": "npx caxa --input '.' --output './bin/musicdb.exe' --exclude './bin' './config' './database' './dist' './logs' -- '{{caxa}}/node_modules/.bin/node' '{{caxa}}/main.js'",
     "dev:help": "node main.js --help",
     "dev:start:download:jpop": "node main.js download --source='jpop'",
     "dev:start:download:drama": "node main.js download --source='drama'",
