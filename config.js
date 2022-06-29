@@ -36,6 +36,10 @@ class Config {
     static get commandDownload() {
         return Config.config.command.download;
     }
+
+    static get commandTags() {
+        return Config.config.command.tags;
+    }
     
     static getSource(source) {
         return Config.config.sources[source];

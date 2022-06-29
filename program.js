@@ -31,6 +31,27 @@ class Program {
             Log.fatal(error.stack);
         }
     }
+
+    async runTags(source) {
+        try {
+            Log.info(`program : tags command : [ ${source}, ${Config.configFile} ]`);
+
+            await this.database.init();
+
+            let facade = new MusicDB(this.database);
+
+            let criteria = { 
+                tags : Config.commandTags,
+                source : Config.getSource(source)
+            };
+
+            await facade.processTags(criteria);
+            
+        } catch (error) {
+            Log.fatal(error.message);
+            Log.fatal(error.stack);
+        }
+    }
 }
 
 export { Program };

@@ -50,7 +50,27 @@ class Database {
             }
 
         } catch (error) {
-            Log.error(`database : error retrieving downloads : [ ${JSON.stringify(criteria)} ]`);
+            Log.error(`database : error retrieving ${criteria.source.table} : [ ${JSON.stringify(criteria)} ]`);
+            Log.error(error.message);
+            Log.error(error.stack);
+        }
+
+        return [];
+    }
+
+    async getDownloadedMedia(criteria) {
+        try {
+
+            const result = await this.selectAll({
+                query: `SELECT * FROM ${criteria.source.table} WHERE Status = 'DONE' ORDER BY Id ASC ${criteria.source.limit}`
+            });
+
+            if (result.length > 0) {
+                return result;
+            }
+
+        } catch (error) {
+            Log.error(`database : error retrieving ${criteria.source.table} : [ ${JSON.stringify(criteria)} ]`);
             Log.error(error.message);
             Log.error(error.stack);
         }
@@ -76,7 +96,7 @@ class Database {
             execResults.updated++;
             
         } catch (error) {
-            Log.error(`database : error updating download : [ ${downloadId} ]`);
+            Log.error(`database : error updating ${criteria.source.table} : [ ${downloadId} ]`);
             Log.error(error.message);
             Log.error(error.stack);
             execResults.errors++;
@@ -84,7 +104,7 @@ class Database {
 
         await this.commit();
 
-        Log.info(`database : download updated : [ added: ${execResults.added}, updated: ${execResults.updated}, deleted: ${execResults.deleted}, errors: ${execResults.errors} ]`);
+        Log.info(`database : ${criteria.source.table} updated : [ added: ${execResults.added}, updated: ${execResults.updated}, deleted: ${execResults.deleted}, errors: ${execResults.errors} ]`);
     }
 }
 

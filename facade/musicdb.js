@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 
@@ -45,10 +46,49 @@ class MusicDB extends Facade {
                 processResults.errors++;
             }
             
-            await Common.sleep(criteria.delay);
+            await Common.sleep(criteria.download.delay);
         }
 
         Log.info(`musicdb : download process completed : [ success: ${processResults.success}, errors: ${processResults.errors} ]`);
+    }
+
+    async processTags(criteria) {
+
+        let processResults = { success: 0, errors: 0 };
+        
+        const tageditor = path.join(path.resolve(criteria.tags.binPath), "tageditor.exe");
+        
+        let media = await this.database.getDownloadedMedia(criteria);
+      
+        for (let mediaIndex = 0; mediaIndex < media.length; mediaIndex++) {
+            
+            const currentMedia = media[mediaIndex];
+            const currentMediaFileName = Common.parseDownloadFileName(criteria.source.table, currentMedia)
+
+            Log.info(`musicdb : processing tags : [ ${currentMediaFileName} ]`);
+
+            try {
+
+                const currentMediaFile = path.join(path.resolve(criteria.tags.outputPath), `${currentMediaFileName}.${criteria.tags.audioFormat}`);
+                
+                if (fs.existsSync(currentMediaFile)) {
+                    const args = `-s title="${currentMedia.Title}" artist="${currentMedia.Artist}" album="${currentMedia.Album}" track="${currentMedia.Id}" --max-padding 100000 -f "${currentMediaFile}"`;
+                    execSync(`${tageditor} ${args}`, { stdio: 'inherit' });
+                } else {
+                    throw new Error(`[ ${currentMediaFile} ] file not found`);
+                }
+
+                processResults.success++
+
+            } catch (error) {
+                Log.error(`[ ${currentMediaFileName} ] : ${error.message}`);
+                processResults.errors++;
+            }
+            
+            await Common.sleep(criteria.tags.delay);
+        }
+
+        Log.info(`musicdb : tags process completed : [ success: ${processResults.success}, errors: ${processResults.errors} ]`);
     }
 }
 

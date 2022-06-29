@@ -11,7 +11,7 @@ let commandOptions = {
     },
     'source' : {
         type : 'string',
-        desc: 'where the information will be retrieved. available options: [ jpop, drama, games, vocaloid ]'
+        desc: 'where the information will be retrieved. available options: [ jpop, drama, games, vocaloid, doujin, animation ]'
     }
 };
 
@@ -24,11 +24,23 @@ let argv = (yargs)(process.argv.slice(2))
         desc: 'use to download media information from youtube',
         builder: (yargs) => { yargs
             .options(commandOptions)
-            .demandOption(requiredOptions, "example: ./musicdb.exe download --env=env --source='jpop'")
+            .demandOption(requiredOptions, "example: ./musicdb.exe download --env=env --source='games'")
         },
         handler: async (argv) => {
             await (new Program(argv.env).runDownload(argv.source));
             Log.info('main : download command completed...');
+        }
+    })
+    .command({
+        command: 'tags [options]',
+        desc: 'use to update id3 tags from downloaded media',
+        builder: (yargs) => { yargs
+            .options(commandOptions)
+            .demandOption(requiredOptions, "example: ./musicdb.exe tags --env=env --source='games'")
+        },
+        handler: async (argv) => {
+            await (new Program(argv.env).runTags(argv.source));
+            Log.info('main : tags command completed...');
         }
     })
     .demandCommand()
