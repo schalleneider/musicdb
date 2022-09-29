@@ -84,6 +84,6 @@ CREATE TABLE "Anime" (
 	"Format" TEXT,
 	"Type" TEXT,
 	"Media" TEXT,
-	"Producer" TEXT,
+	"Composer" TEXT,
     PRIMARY KEY("Id")
 )
