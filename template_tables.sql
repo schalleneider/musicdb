@@ -7,6 +7,7 @@ DROP TABLE Vocaloid;
 DROP TABLE Doujin;
 DROP TABLE Animation;
 DROP TABLE Anime;
+DROP TABLE OST;
 
 -- TABLES
 
@@ -83,6 +84,19 @@ CREATE TABLE "Anime" (
     "Anime" TEXT,
 	"Format" TEXT,
 	"Type" TEXT,
+	"Media" TEXT,
+	"Composer" TEXT,
+    PRIMARY KEY("Id")
+);
+
+CREATE TABLE "OST" (
+    "Id" INTEGER,
+    "Address" TEXT,
+    "Status" TEXT,
+    "Artist" TEXT,
+    "Title" TEXT,
+    "Album" TEXT,
+    "Anime" TEXT,	
 	"Media" TEXT,
 	"Composer" TEXT,
     PRIMARY KEY("Id")
