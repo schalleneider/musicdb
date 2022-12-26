@@ -40,6 +40,10 @@ class Config {
     static get commandTags() {
         return Config.config.command.tags;
     }
+
+    static get commandFilename() {
+        return Config.config.command.filename;
+    }
     
     static getSource(source) {
         return Config.config.sources[source];

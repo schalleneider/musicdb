@@ -43,6 +43,18 @@ let argv = (yargs)(process.argv.slice(2))
             Log.info('main : tags command completed...');
         }
     })
+    .command({
+        command: 'filename [options]',
+        desc: 'use to replace the filename with the information from the database',
+        builder: (yargs) => { yargs
+            .options(commandOptions)
+            .demandOption(requiredOptions, "example: ./musicdb.exe filename --env=env --source='games'")
+        },
+        handler: async (argv) => {
+            await (new Program(argv.env).runFilename(argv.source));
+            Log.info('main : filename command completed...');
+        }
+    })
     .demandCommand()
     .help()
     .wrap(150)

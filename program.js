@@ -52,6 +52,27 @@ class Program {
             Log.fatal(error.stack);
         }
     }
+
+    async runFilename(source) {
+        try {
+            Log.info(`program : filename command : [ ${source}, ${Config.configFile} ]`);
+
+            await this.database.init();
+
+            let facade = new MusicDB(this.database);
+
+            let criteria = { 
+                filename : Config.commandFilename,
+                source : Config.getSource(source)
+            };
+
+            await facade.processFilename(criteria);
+            
+        } catch (error) {
+            Log.fatal(error.message);
+            Log.fatal(error.stack);
+        }
+    }
 }
 
 export { Program };

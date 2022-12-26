@@ -38,11 +38,11 @@ class Database {
         return await this.database.run(config.query, config.params)
     }
 
-    async getDownloads(criteria) {
+    async getSourceMedia(criteria, status) {
         try {
 
             const result = await this.selectAll({
-                query: `SELECT * FROM ${criteria.source.table} WHERE Status = '${criteria.source.readiness}' ORDER BY Id ASC ${criteria.source.limit}`
+                query: `SELECT * FROM ${criteria.source.table} WHERE Status = '${status}' ORDER BY Id ASC ${criteria.source.limit}`
             });
 
             if (result.length > 0) {
@@ -50,27 +50,7 @@ class Database {
             }
 
         } catch (error) {
-            Log.error(`database : error retrieving ${criteria.source.table} : [ ${JSON.stringify(criteria)} ]`);
-            Log.error(error.message);
-            Log.error(error.stack);
-        }
-
-        return [];
-    }
-
-    async getDownloadedMedia(criteria) {
-        try {
-
-            const result = await this.selectAll({
-                query: `SELECT * FROM ${criteria.source.table} WHERE Status = 'DONE' ORDER BY Id ASC ${criteria.source.limit}`
-            });
-
-            if (result.length > 0) {
-                return result;
-            }
-
-        } catch (error) {
-            Log.error(`database : error retrieving ${criteria.source.table} : [ ${JSON.stringify(criteria)} ]`);
+            Log.error(`database : error retrieving ${criteria.source.table} : [ ${JSON.stringify(criteria)}, ${status} ]`);
             Log.error(error.message);
             Log.error(error.stack);
         }

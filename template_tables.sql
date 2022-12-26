@@ -100,4 +100,19 @@ CREATE TABLE "OST" (
 	"Media" TEXT,
 	"Composer" TEXT,
     PRIMARY KEY("Id")
-)
+);
+
+CREATE TABLE "Anime" (
+	"Id" INTEGER,
+	"Address" TEXT,
+	"Status" TEXT,
+	"Artist" TEXT,
+	"Title" TEXT,
+	"Album" TEXT,
+	"Anime" TEXT,
+	"Format" TEXT,
+	"Type" TEXT,
+	"Media" TEXT,
+	"Composer" TEXT,
+	PRIMARY KEY("Id")
+);
